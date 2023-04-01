@@ -168,13 +168,16 @@ namespace
 {
 	unsigned myLog2(unsigned n)
 	{
-		int count = 0;
-		while (n)
+		if(n != 0)
 		{
-			n >>= 1;
-			count++;
+			unsigned count = 0;
+			while (n)
+			{
+				n >>= 1;
+				count++;
+			}
+			return count - 1;
 		}
-		return count - 1;
 	}
 }
 void BelotTournament::PlayTournament()
