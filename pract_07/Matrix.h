@@ -23,8 +23,8 @@ public:
 	int*& operator[](int indexOfRow);
 	int* operator[](int indexOfRow) const;
 	friend bool operator==(const Matrix& lhs, const Matrix& rhs);
-	friend std::istream& operator>>(std::istream& is, Matrix& matrix);
-	friend std::ostream& operator<<(std::ostream& os, const Matrix& matrix);
+	friend std::istream& operator>>(std::istream& is, Matrix& matrix); //addition
+	friend std::ostream& operator<<(std::ostream& os, const Matrix& matrix); //addition
 };
 Matrix operator+(const Matrix& lhs, const Matrix& rhs);
 Matrix operator-(const Matrix& lhs, const Matrix& rhs);
