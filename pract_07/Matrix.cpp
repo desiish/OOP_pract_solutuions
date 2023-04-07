@@ -23,6 +23,7 @@ void Matrix::free()
 	_matrix = nullptr;
 	_n = _m = 0;
 }
+
 Matrix Matrix::getNegativeMatr() const
 {
 	for (int i = 0; i < _m; i++)
@@ -32,6 +33,7 @@ Matrix Matrix::getNegativeMatr() const
 	}
 	return *this;
 }
+
 Matrix::Matrix() : Matrix(2, 2){}
 Matrix::Matrix(size_t m, size_t n)
 {
@@ -62,6 +64,7 @@ Matrix& Matrix::operator=(const Matrix& other)
 	}
 	return *this;
 }
+
 Matrix& Matrix::operator+=(const Matrix& other)
 {
 	if (_m != other._m || _n != other._n)
@@ -73,6 +76,7 @@ Matrix& Matrix::operator+=(const Matrix& other)
 	}
 	return *this;
 }
+
 Matrix& Matrix::operator-=(const Matrix& other)
 {
 	if (_m != other._m || _n != other._n)
@@ -81,6 +85,7 @@ Matrix& Matrix::operator-=(const Matrix& other)
 	*this += NegativeOther;
 	return *this;
 }
+
 int getMultiplicationResCellValue(const Matrix& lhs, const Matrix& rhs, int rowInd, int colInd)
 {
 	int res = 0;
@@ -88,6 +93,7 @@ int getMultiplicationResCellValue(const Matrix& lhs, const Matrix& rhs, int rowI
 		res += lhs._matrix[rowInd][i] * rhs._matrix[i][colInd];
 	return res;
 }
+
 Matrix& Matrix::operator*=(const Matrix& other)
 {
 	if (_n != other._m)
@@ -101,6 +107,7 @@ Matrix& Matrix::operator*=(const Matrix& other)
 	*this = result; 
 	return *this;
 }
+
 Matrix& Matrix::operator*=(int num)
 {
 	for (int i = 0; i < _m; i++)
@@ -110,38 +117,45 @@ Matrix& Matrix::operator*=(int num)
 	}
 	return *this;
 }
+
 int*& Matrix::operator[](int indexOfRow)
 {
 	return _matrix[indexOfRow];
 }
+
 int* Matrix::operator[](int indexOfRow) const
 {
 	return _matrix[indexOfRow];
 }
+
 Matrix operator+(const Matrix& lhs, const Matrix& rhs)
 {
 	Matrix copyOfLhs(lhs);
 	copyOfLhs += rhs;
 	return copyOfLhs;
 }
+
 Matrix operator-(const Matrix& lhs, const Matrix& rhs)
 {
 	Matrix copyOfLhs(lhs);
 	copyOfLhs -= rhs;
 	return copyOfLhs;
 }
+
 Matrix operator*(const Matrix& lhs, const Matrix& rhs)
 {
 	Matrix copyOfLhs(lhs);
 	copyOfLhs *= rhs;
 	return copyOfLhs;
 }
+
 Matrix operator*(const Matrix& lhs, int num)
 {
 	Matrix copyOfLhs(lhs);
 	copyOfLhs *= num;
 	return copyOfLhs;
 }
+
 bool operator==(const Matrix& lhs, const Matrix& rhs)
 {
 	if (lhs._m != rhs._m || lhs._n != rhs._n)
@@ -154,10 +168,12 @@ bool operator==(const Matrix& lhs, const Matrix& rhs)
 	}
 	return true;
 }
+
 bool operator!=(const Matrix& lhs, const Matrix& rhs)
 {
 	return !(lhs == rhs);
 }
+
 std::istream& operator>>(std::istream& is, Matrix& matrix)
 {
 	for (int i = 0; i < matrix._m; i++)
@@ -167,6 +183,7 @@ std::istream& operator>>(std::istream& is, Matrix& matrix)
 	}
 	return is;
 }
+
 std::ostream& operator<<(std::ostream& os, const Matrix& matrix)
 {
 	for (int i = 0; i < matrix._m; i++)
