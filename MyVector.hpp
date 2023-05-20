@@ -54,6 +54,7 @@ template <typename T>
 void MyVector<T>::free()
 {
 	delete[] _data;
+	_data = nullptr;
 	_capacity = _size = 0;
 }
 
@@ -174,7 +175,7 @@ void MyVector<T>::insert(const T& data, unsigned idx)
 
 	_size++;
 	for (int i = _size - 1; i > idx; i--)
-		_data[i] = _data[i - 1];
+		_data[i] = std::move(_data[i - 1]);
 	_data[idx] = data;
 }
 
@@ -188,8 +189,8 @@ void MyVector<T>::insert(T&& data, unsigned idx)
 		resize(2 * _capacity);
 
 	_size++;
-	for (int i = idx; i < _size - 1; i++)
-		_data[i] = _data[i + 1];
+	for (int i = _size - 1; i > idx; i--)
+		_data[i] = std::move(_data[i - 1]);
 	_data[idx] = std::move(data);
 }
 template <typename T>
@@ -198,10 +199,10 @@ void MyVector<T>::erase(unsigned idx)
 	if (idx >= _size)
 		throw std::out_of_range("Index out of range");
 
-	for (int i = idx + 1; i < _size; i++)
-		_data[i] = _data[i - 1];
+	for (int i = idx; i < _size - 1; i++)
+		_data[i] = std::move(_data[i + 1]);
 	_size--;
-	if (_size < _capacity / 2)
+	if (_size == _capacity / 4)
 		resize(_capacity / 2);
 }
 
