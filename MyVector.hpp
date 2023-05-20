@@ -188,8 +188,8 @@ void MyVector<T>::insert(T&& data, unsigned idx)
 		resize(2 * _capacity);
 
 	_size++;
-	for (int i = _size - 1; i > idx; i--)
-		_data[i] = _data[i - 1];
+	for (int i = idx; i < _size - 1; i++)
+		_data[i] = _data[i + 1];
 	_data[idx] = std::move(data);
 }
 template <typename T>
